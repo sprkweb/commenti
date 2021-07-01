@@ -6,6 +6,8 @@ import { terser } from 'rollup-plugin-terser';
 import sveltePreprocess from 'svelte-preprocess';
 import typescript from '@rollup/plugin-typescript';
 import css from 'rollup-plugin-css-only';
+import graphql from '@rollup/plugin-graphql';
+import replace from '@rollup/plugin-replace';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -39,6 +41,11 @@ export default {
 		file: 'public/build/commenti.js'
 	},
 	plugins: [
+        // https://github.com/timhall/svelte-apollo/issues/8
+        replace({
+            'process.env.NODE_ENV': JSON.stringify( 'production' )
+        }),
+
 		svelte({
 			preprocess: sveltePreprocess({ sourceMap: !production }),
 			compilerOptions: {
@@ -50,6 +57,8 @@ export default {
 		// a separate file - better for performance
 		css({ output: 'commenti.css' }),
 
+
+        graphql(),
 		// If you have external dependencies installed from
 		// npm, you'll most likely need these plugins. In
 		// some cases you'll need additional configuration -

@@ -1,0 +1,10 @@
+query GetComments {
+    allComments {
+        dateCreated
+        dateEdited
+        author {
+            username
+        }
+        text
+    }
+}
