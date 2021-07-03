@@ -1,0 +1,11 @@
+.commenti-comment {
+    margin-bottom: 1rem;
+}
+
+.commenti-author {
+    font-weight: bold;
+}
+
+.commenti-date {
+    color: grey;
+}

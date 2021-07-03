@@ -6,6 +6,18 @@
         .toLocaleString();
 </script>
 
-<p>
-    { comment.author.username }, { date }: { comment.text }
-</p>
+<div class="commenti-comment">
+    <div class="commenti-comment-main">
+        <div class="commenti-comment-header">
+            <span class="commenti-author">
+                { comment.author.username }
+            </span>
+            <span class="commenti-date">
+                { date }
+            </span>
+        </div>
+        <div class="commenti-comment-content">
+            { comment.text }
+        </div>
+    </div>
+</div>

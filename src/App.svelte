@@ -19,7 +19,7 @@
     const comments = query<{ allComments: CommentInfo[] }>(GetComments);
 </script>
 
-<main>
+<main class="commenti-section">
     {#if $comments.loading}
         Loading...
     {:else if $comments.error}
