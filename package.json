@@ -6,16 +6,21 @@
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "start": "sirv public --no-clear",
-    "check": "svelte-check --tsconfig ./tsconfig.json"
+    "check": "svelte-check --tsconfig ./tsconfig.json",
+    "test": "rollup -c rollup.test.config.js && mocha --"
   },
   "devDependencies": {
     "@apollo/client": "^3.3.20",
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-graphql": "^1.0.0",
+    "@rollup/plugin-multi-entry": "^4.0.0",
     "@rollup/plugin-node-resolve": "^11.0.0",
     "@rollup/plugin-replace": "^2.4.2",
     "@rollup/plugin-typescript": "^8.0.0",
     "@tsconfig/svelte": "^2.0.0",
+    "@types/chai": "^4.2.19",
+    "chai": "^4.3.4",
+    "mocha": "^9.0.2",
     "rollup": "^2.3.4",
     "rollup-plugin-css-only": "^3.1.0",
     "rollup-plugin-livereload": "^2.0.0",
@@ -30,5 +35,8 @@
   },
   "dependencies": {
     "sirv-cli": "^1.0.0"
+  },
+  "mocha": {
+    "spec": "build/bundle-tests.js"
   }
 }
