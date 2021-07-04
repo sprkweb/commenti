@@ -1,9 +1,10 @@
 <script lang="ts">
+    import FormattedDate from "./FormattedDate.svelte";
+
     export let comment: CommentInfo;
 
-    let date: string;
-    $: date = new Date(comment.dateCreated)
-        .toLocaleString();
+    let date: Date;
+    $: date = new Date(comment.dateCreated);
 </script>
 
 <div class="commenti-comment">
@@ -13,7 +14,7 @@
                 { comment.author.username }
             </span>
             <span class="commenti-date">
-                { date }
+                <FormattedDate date={date} />
             </span>
         </div>
         <div class="commenti-comment-content">
