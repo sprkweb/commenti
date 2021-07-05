@@ -1,5 +1,5 @@
-query GetComments {
-    allComments {
+query GetComments($page_id: String) {
+    comments(page: $page_id) {
         dateCreated
         dateEdited
         author {
