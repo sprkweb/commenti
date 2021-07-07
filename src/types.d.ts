@@ -5,6 +5,18 @@ declare interface UserInfo {
 declare interface CommentInfo {
     dateCreated: string
     dateEdited: string
-    author: User
+    author: UserInfo
     text: string
+    children: GQLConnection<CommentInfo>
+}
+
+declare interface GQLConnection<NodeType> {
+    pageInfo: {
+        endCursor: string
+        hasNextPage: boolean
+    },
+    edges: Array<{
+        node: NodeType
+        cursor: string
+    }>
 }

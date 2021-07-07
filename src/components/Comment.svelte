@@ -1,5 +1,6 @@
 <script lang="ts">
     import FormattedDate from "./FormattedDate.svelte";
+    import CommentChildren from "./CommentChildren.svelte";
 
     export let comment: CommentInfo;
 
@@ -21,4 +22,6 @@
             { comment.text }
         </div>
     </div>
+
+    <CommentChildren comment={comment} />
 </div>

@@ -5,8 +5,11 @@
         } from "@apollo/client";
     import { setClient, query } from "svelte-apollo";
 
-    import Comment from './components/Comment.svelte';
-    import { GetComments } from './requests.graphql';
+    import { ConnectionList } from "./helpers/ConnectionList";
+
+    import CommentList from './components/CommentList.svelte';
+
+    import { GetComments } from './requests.gql';
 
     export let server_uri: string;
     export let page_id: string;
@@ -17,7 +20,7 @@
     });
     setClient(client);
 
-    const comments = query<{ comments: CommentInfo[] }>(
+    const comments = query<{ comments: GQLConnection<CommentInfo> }>(
         GetComments, {
             variables: {
                 page_id
@@ -31,8 +34,6 @@
     {:else if $comments.error}
         {$comments.error.toString()}
     {:else}
-        {#each $comments.data.comments as comment}
-	        <Comment comment={comment} />
-        {/each}
+        <CommentList list={new ConnectionList($comments.data.comments)} />
     {/if}
 </main>

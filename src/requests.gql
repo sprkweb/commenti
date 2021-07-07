@@ -1,0 +1,37 @@
+query GetComments($page_id: String!, $max_toplevel: Int = 5, $max_sublevel: Int = 10) {
+    comments(page: $page_id, first: $max_toplevel) {
+        ...commentConnectionFields
+        edges { node { children(first: $max_sublevel) {
+            ...commentConnectionFields
+            edges { node { children(first: $max_sublevel) {
+                ...commentConnectionFields
+                # Three levels shown by default is enough, amirite
+                edges { node { children(first: 0) {
+                    ...commentConnectionFields
+                } } }
+            } } }
+        } } }
+    }
+}
+
+fragment commentConnectionFields on CommentGQLNodeConnection {
+    edges {
+        node {
+        ...commentFields
+        }
+        cursor
+    }
+    pageInfo {
+        endCursor
+        hasNextPage
+    }
+}
+
+fragment commentFields on CommentGQLNode {
+    dateCreated
+    dateEdited
+    author {
+        username
+    }
+    text
+}

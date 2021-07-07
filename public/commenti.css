@@ -9,3 +9,8 @@
 .commenti-date {
     color: grey;
 }
+
+.commenti-comment-children {
+    border-left: 3px solid lightgrey;
+    padding: 1rem 0 0 1rem;
+}
