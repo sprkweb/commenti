@@ -13,6 +13,7 @@
     "@apollo/client": "^3.3.20",
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-graphql": "^1.0.0",
+    "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-multi-entry": "^4.0.0",
     "@rollup/plugin-node-resolve": "^11.0.0",
     "@rollup/plugin-replace": "^2.4.2",
@@ -30,6 +31,7 @@
     "svelte": "^3.0.0",
     "svelte-apollo": "^0.4.0",
     "svelte-check": "^2.0.0",
+    "svelte-i18n": "^3.3.9",
     "svelte-preprocess": "^4.0.0",
     "tslib": "^2.0.0",
     "typescript": "^4.0.0"

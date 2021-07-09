@@ -7,6 +7,7 @@ import sveltePreprocess from 'svelte-preprocess';
 import typescript from '@rollup/plugin-typescript';
 import css from 'rollup-plugin-css-only';
 import graphql from '@rollup/plugin-graphql';
+import json from '@rollup/plugin-json';
 import replace from '@rollup/plugin-replace';
 
 const production = !process.env.ROLLUP_WATCH;
@@ -38,7 +39,7 @@ export default {
 		sourcemap: true,
 		format: 'esm',
 		name: 'app',
-		file: 'public/build/commenti.js'
+		dir: 'public/build'
 	},
 	plugins: [
         // https://github.com/timhall/svelte-apollo/issues/8
@@ -57,8 +58,9 @@ export default {
 		// a separate file - better for performance
 		css({ output: 'commenti.css' }),
 
-
         graphql(),
+        json({ compact: true }),
+
 		// If you have external dependencies installed from
 		// npm, you'll most likely need these plugins. In
 		// some cases you'll need additional configuration -
