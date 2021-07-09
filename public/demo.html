@@ -15,9 +15,9 @@
 	<link rel='stylesheet' href='/commenti.css'>
 
     <script defer type="module">
-        import App from '/build/commenti.js';
+        import Commenti from '/build/commenti.js';
 
-        const app = new App({
+        new Commenti({
             target: document.body,
             props: {
                 server_uri: 'http://localhost:8000/graphql',

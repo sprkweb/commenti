@@ -33,7 +33,7 @@ function serve() {
 }
 
 export default {
-	input: 'src/App.svelte',
+	input: 'src/Commenti.svelte',
 	output: {
 		sourcemap: true,
 		format: 'esm',
