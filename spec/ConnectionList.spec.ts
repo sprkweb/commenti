@@ -16,6 +16,17 @@ let sources: GQLConnection<Number> = {
     }
 };
 
+let secondSourcesPage: GQLConnection<Number> = {
+    edges: [
+        { node: 555, cursor: "cursor5" },
+        { node: 666, cursor: "cursor6" },
+    ],
+    pageInfo: {
+        endCursor: "cursor6",
+        hasNextPage: false
+    }
+};
+
 describe('ConnectionList', () => {
     it("can return length", () => {
         const l = new ConnectionList(sources);
@@ -36,5 +47,28 @@ describe('ConnectionList', () => {
         expect(l[1]).to.be.equal(222);
         expect(l[2]).to.be.equal(333);
         expect(l[3]).to.be.equal(444);
+    });
+
+    it("can say if next page is available", () => {
+        const l = new ConnectionList(sources);
+        expect(l.hasMore).to.be.equal(true);
+    });
+
+    it("can return the end cursor", () => {
+        const l = new ConnectionList(sources);
+        expect(l.endCursor).to.be.equal("cursor4");
+    });
+
+    it("can be merged with another connection", () => {
+        const l = new ConnectionList(sources);
+        const merged = l.merge(secondSourcesPage);
+
+        let arr = [];
+        for (let x of merged)
+            arr.push(x);
+
+        expect(arr).to.have.members([111, 222, 333, 444, 555, 666]);
+        expect(merged.hasMore).to.be.equal(false);
+        expect(merged.endCursor).to.be.equal("cursor6");
     });
 })

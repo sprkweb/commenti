@@ -33,8 +33,27 @@ export class ConnectionList<Node> implements ArrayLike<Node>, Iterable<Node> {
         };
     }
 
-    get length() {
+    get length(): number {
         return this.#list.edges.length;
+    }
+
+    get hasMore(): boolean {
+        return this.#list.pageInfo.hasNextPage;
+    }
+
+    get endCursor(): string {
+        return this.#list.pageInfo.endCursor;
+    }
+
+    merge(incoming: GQLConnection<Node>): ConnectionList<Node> {
+        let newConnection = {
+            edges: [...this.#list.edges, ...incoming.edges],
+            pageInfo: {
+                endCursor: incoming.pageInfo.endCursor,
+                hasNextPage: incoming.pageInfo.hasNextPage
+            }
+        };
+        return new ConnectionList(newConnection);
     }
 }
 
