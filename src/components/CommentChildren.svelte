@@ -2,8 +2,7 @@
     import { getClient } from "svelte-apollo";
     import { ConnectionList } from "../helpers/ConnectionList";
     import { LoadMoreChildComments } from '../requests.gql';
-    import CommentList from "./CommentList.svelte";
-    import LoadMoreButton from "./LoadMoreButton.svelte";
+    import CommentsLevel from "./CommentsLevel.svelte";
 
     export let comment: CommentInfo;
 
@@ -25,7 +24,8 @@
 
 {#if list.length > 0 || list.hasMore }
     <div class="commenti-comment-children">
-        <CommentList list={list} />
-        <LoadMoreButton list={list} on:loadMore={loadMoreReplies} />
+        <CommentsLevel
+            list={list}
+            on:loadMore={loadMoreReplies} />
     </div>
 {/if}
