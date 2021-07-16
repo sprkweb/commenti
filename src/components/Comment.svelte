@@ -23,5 +23,7 @@
         </div>
     </div>
 
-    <CommentChildren comment={comment} />
+    {#if comment.children}
+        <CommentChildren comment={comment} />
+    {/if}
 </div>

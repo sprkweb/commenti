@@ -3,11 +3,12 @@ declare interface UserInfo {
 }
 
 declare interface CommentInfo {
+    id: string
     dateCreated: string
     dateEdited: string
     author: UserInfo
     text: string
-    children: GQLConnection<CommentInfo>
+    children?: GQLConnection<CommentInfo>
 }
 
 declare interface GQLConnection<NodeType> {

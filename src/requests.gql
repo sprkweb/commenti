@@ -1,17 +1,42 @@
-query GetComments($page_id: String!, $max_toplevel: Int = 5, $max_sublevel: Int = 10) {
-    comments(page: $page_id, first: $max_toplevel) {
+query GetComments(
+  	$page_id: String!,
+    $after: String,
+  	$max_comments_at_toplevel: Int = 5,
+  	$max_comments_per_sublevel: Int = 10
+) {
+    comments(page: $page_id, first: $max_comments_at_toplevel, after: $after) {
         ...commentConnectionFields
-        edges { node { children(first: $max_sublevel) {
-            ...commentConnectionFields
-            edges { node { children(first: $max_sublevel) {
-                ...commentConnectionFields
-                # Three levels shown by default is enough, amirite
-                edges { node { children(first: 0) {
-                    ...commentConnectionFields
-                } } }
-            } } }
+        edges { node { children(first: $max_comments_per_sublevel) {
+            ...threeLevelsOfChildComments
         } } }
     }
+}
+
+query LoadMoreChildComments(
+    $commentID: ID!,
+    $after: String,
+  	$max_comments_per_sublevel: Int = 10
+) {
+    comment(id: $commentID) {
+        children(first: $max_comments_per_sublevel, after: $after) {
+            ...threeLevelsOfChildComments
+        }
+    }
+}
+
+fragment threeLevelsOfChildComments on CommentGQLNodeConnection {
+    ...commentConnectionFields
+    edges { node {
+        children(first: $max_comments_per_sublevel) {
+            ...commentConnectionFields
+            edges { node {
+                # Three levels shown by default is enough, amirite
+                children(first: 0) {
+                    ...commentConnectionFields
+                }
+            } }
+        }
+    } }
 }
 
 fragment commentConnectionFields on CommentGQLNodeConnection {
@@ -19,7 +44,6 @@ fragment commentConnectionFields on CommentGQLNodeConnection {
         node {
         ...commentFields
         }
-        cursor
     }
     pageInfo {
         endCursor
@@ -28,6 +52,7 @@ fragment commentConnectionFields on CommentGQLNodeConnection {
 }
 
 fragment commentFields on CommentGQLNode {
+    id
     dateCreated
     dateEdited
     author {

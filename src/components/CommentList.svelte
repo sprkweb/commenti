@@ -4,6 +4,6 @@
     export let list: ArrayLike<CommentInfo>;
 </script>
 
-{#each list as comment}
+{#each list as comment (comment.id)}
     <Comment comment={comment} />
 {/each}
