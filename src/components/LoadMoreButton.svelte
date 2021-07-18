@@ -15,6 +15,7 @@
         try {
             dispatch('loadMore', event.detail);
         } catch (err) {
+            status = 'error';
             error = err;
         }
 	}

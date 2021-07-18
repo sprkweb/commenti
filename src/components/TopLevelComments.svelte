@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { query } from 'svelte-apollo';
+    import { getClient } from 'svelte-apollo';
 
     import { ConnectionList } from "../helpers/ConnectionList";
     import CommentsLevel from './CommentsLevel.svelte';
@@ -7,25 +7,41 @@
 
     export let page_id: string;
 
-    const comments = query<{ comments: GQLConnection<CommentInfo> }>(
-        GetComments, {
+    const client = getClient();
+    let loading = true;
+    let error;
+    let list: ConnectionList<CommentInfo>;
+
+    client
+        .query<{ comments: GQLConnection<CommentInfo> }>({
+            query: GetComments,
             variables: {
                 page_id
             }
-        });
+        })
+        .then(({ data }) => list = new ConnectionList(data.comments))
+        .catch((err) => error = err)
+        .finally(() => loading = false);
 
     async function loadMoreReplies() {
-        // TODO
+        const { data } = await client.query<{ comments: GQLConnection<CommentInfo> }>({
+            query: GetComments,
+            variables: {
+                page_id,
+                after: list.endCursor
+            }
+        });
+        list = list.merge(data.comments);
     }
 </script>
 
-{#if $comments.loading}
+{#if loading}
     Loading...
-{:else if $comments.error}
-    {$comments.error.toString()}
+{:else if error}
+    {error.toString()}
 {:else}
     <CommentsLevel
-        list={new ConnectionList($comments.data.comments)}
+        list={list}
         on:loadMore={loadMoreReplies}
         />
 {/if}
