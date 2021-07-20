@@ -2,7 +2,7 @@
     import { getClient } from 'svelte-apollo';
 
     import { ConnectionList } from "../helpers/ConnectionList";
-    import CommentsLevel from './CommentsLevel.svelte';
+    import CommentsLevel from './CommentsLevel/CommentsLevel.svelte';
     import { GetComments } from '../requests.gql';
 
     export let page_id: string;

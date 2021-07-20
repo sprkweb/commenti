@@ -2,7 +2,7 @@
     import { getClient } from "svelte-apollo";
     import { ConnectionList } from "../helpers/ConnectionList";
     import { LoadMoreChildComments } from '../requests.gql';
-    import CommentsLevel from "./CommentsLevel.svelte";
+    import CommentsLevel from "./CommentsLevel/CommentsLevel.svelte";
 
     export let comment: CommentInfo;
 

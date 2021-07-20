@@ -1,5 +1,5 @@
 <script lang="ts">
-    import FormattedDate from "./FormattedDate.svelte";
+    import FormattedDate from "../partials/FormattedDate.svelte";
     import CommentChildren from "./CommentChildren.svelte";
 
     export let comment: CommentInfo;

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { ConnectionList } from "../helpers/ConnectionList";
+    import type { ConnectionList } from "../../helpers/ConnectionList";
 
     import CommentList from "./CommentList.svelte";
     import LoadMoreButton from "./LoadMoreButton.svelte";
