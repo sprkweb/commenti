@@ -19,5 +19,17 @@ jobs:
                 node-version: '16'
                 cache: 'npm'
 
-            - run: npm install
-            - run: npm run test
+            - name: Install dependecies
+              run: npm install
+
+            - name: Test
+              run: npm run test
+
+            - name: Build
+              run: npm run build
+
+            - name: Upload Artifact
+              uses: actions/upload-artifact@v2
+              with:
+                name: Commenti Build
+                path: public/build/
