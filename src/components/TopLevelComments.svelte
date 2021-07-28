@@ -1,5 +1,6 @@
 <script lang="ts">
     import { getClient } from 'svelte-apollo';
+    import { _ } from 'svelte-i18n';
 
     import { ConnectionList } from "../helpers/ConnectionList";
     import CommentsLevel from './CommentsLevel/CommentsLevel.svelte';
@@ -36,7 +37,7 @@
 </script>
 
 {#if loading}
-    Loading...
+    {$_('loading')}
 {:else if error}
     {error.toString()}
 {:else}

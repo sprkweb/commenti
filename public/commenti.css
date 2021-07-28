@@ -10,7 +10,36 @@
     color: grey;
 }
 
+.commenti-error-message {
+    color: red;
+}
+
 .commenti-comment-children {
     border-left: 3px solid lightgrey;
     padding: 1rem 0 0 1rem;
+}
+
+.commenti-auth-block {
+    margin-bottom: 1rem;
+}
+
+
+.commenti-form-fields-group {
+    display: table;
+}
+
+.commenti-form-fields-group .commenti-form-field {
+    display: table-row;
+}
+
+.commenti-form-fields-group .commenti-form-field label,
+.commenti-form-fields-group .commenti-form-field span {
+    display: table-cell;
+    padding-right: 1rem;
+}
+
+.commenti-form-fields-group .commenti-form-field label:last-child,
+.commenti-form-fields-group .commenti-form-field span:last-child {
+    display: table-cell;
+    padding-right: 0;
 }

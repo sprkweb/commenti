@@ -1,0 +1,14 @@
+{
+    "load-more-replies": "Показать больше комментариев",
+    "loading": "Загрузка...",
+    "userAuth": {
+        "login": "Войти",
+        "logout": "Выйти",
+        "greetings": "Вы вошли как {name}.",
+        "error": "Что-то пошло не так"
+    },
+    "formField": {
+        "username": "Логин",
+        "password": "Пароль"
+    }
+}

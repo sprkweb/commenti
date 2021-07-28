@@ -1,0 +1,14 @@
+{
+    "load-more-replies": "Load more replies",
+    "loading": "Loading...",
+    "userAuth": {
+        "login": "Log in",
+        "logout": "Log out",
+        "greetings": "You are logged in as {name}.",
+        "error": "Something went wrong"
+    },
+    "formField": {
+        "username": "Login",
+        "password": "Password"
+    }
+}
