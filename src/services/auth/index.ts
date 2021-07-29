@@ -1,7 +1,7 @@
 import { writable } from "svelte/store";
 import type { ApolloClient } from "@apollo/client";
 
-import { CurrentUser } from '../../requests.gql';
+import { CurrentUserDocument } from '../../requests';
 
 import { tokenAuth, tokenIsSet } from './tokenStorage';
 
@@ -39,8 +39,8 @@ const authStore = {
             return;
         }
         client
-            .query<{ currentUser: UserInfo }>({
-                query: CurrentUser
+            .query({
+                query: CurrentUserDocument
             })
             .then(({ data }) =>
                 set({

@@ -1,7 +1,7 @@
 <script lang="ts">
     import { getClient } from "svelte-apollo";
     import { ConnectionList } from "../helpers/ConnectionList";
-    import { LoadMoreChildComments } from '../requests.gql';
+    import { LoadMoreChildCommentsDocument } from '../requests';
     import CommentsLevel from "./CommentsLevel/CommentsLevel.svelte";
 
     export let comment: CommentInfo;
@@ -11,8 +11,8 @@
 
     const client = getClient();
     async function loadMoreReplies() {
-        const { data } = await client.query<{ comment: CommentInfo }>({
-            query: LoadMoreChildComments,
+        const { data } = await client.query({
+            query: LoadMoreChildCommentsDocument,
             variables: {
                 commentID: comment.id,
                 after: list.endCursor

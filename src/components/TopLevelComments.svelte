@@ -4,7 +4,7 @@
 
     import { ConnectionList } from "../helpers/ConnectionList";
     import CommentsLevel from './CommentsLevel/CommentsLevel.svelte';
-    import { GetComments } from '../requests.gql';
+    import { GetCommentsDocument } from '../requests';
 
     export let page_id: string;
 
@@ -14,19 +14,19 @@
     let list: ConnectionList<CommentInfo>;
 
     client
-        .query<{ comments: GQLConnection<CommentInfo> }>({
-            query: GetComments,
+        .query({
+            query: GetCommentsDocument,
             variables: {
                 page_id
             }
         })
-        .then(({ data }) => list = new ConnectionList(data.comments))
+        .then(({ data }) => list = new ConnectionList<CommentInfo>(data.comments))
         .catch((err) => error = err)
         .finally(() => loading = false);
 
     async function loadMoreReplies() {
-        const { data } = await client.query<{ comments: GQLConnection<CommentInfo> }>({
-            query: GetComments,
+        const { data } = await client.query({
+            query: GetCommentsDocument,
             variables: {
                 page_id,
                 after: list.endCursor

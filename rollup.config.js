@@ -6,7 +6,6 @@ import { terser } from 'rollup-plugin-terser';
 import sveltePreprocess from 'svelte-preprocess';
 import typescript from '@rollup/plugin-typescript';
 import css from 'rollup-plugin-css-only';
-import graphql from '@rollup/plugin-graphql';
 import json from '@rollup/plugin-json';
 import replace from '@rollup/plugin-replace';
 
@@ -58,7 +57,6 @@ export default {
 		// a separate file - better for performance
 		css({ output: 'commenti.css' }),
 
-        graphql(),
         json({ compact: true }),
 
 		// If you have external dependencies installed from

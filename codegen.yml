@@ -1,0 +1,11 @@
+overwrite: true
+schema: "http://localhost:8012/graphql"
+documents: "./src/**/*.gql"
+generates:
+    src/requests/index.ts:
+        plugins:
+            - typescript
+            - typescript-operations
+            - typed-document-node
+        config:
+            dedupeFragments: true

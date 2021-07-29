@@ -1,5 +1,5 @@
 import type { ApolloClient } from "@apollo/client";
-import { TokenAuth, RefreshToken } from '../../requests.gql';
+import { TokenAuthDocument, RefreshTokenDocument } from '../../requests';
 
 const accessTokenKey = 'commentiAccessToken';
 const refreshTokenKey = 'commentiRefreshToken'
@@ -35,9 +35,8 @@ function clearTokens() {
 }
 
 async function tokenAuth(client: ApolloClient<any>, username: string, password: string): Promise<UserInfo> {
-    const { data } = await client
-        .mutate<{ tokenAuth: { token: string; refreshToken: string; payload: any; refreshTokenExpiresIn: number; user: UserInfo }; }>({
-            mutation: TokenAuth,
+    const { data } = await client.mutate({
+            mutation: TokenAuthDocument,
             variables: {
                 username, password
             }
@@ -50,9 +49,8 @@ async function tokenAuth(client: ApolloClient<any>, username: string, password: 
 async function refreshToken(client: ApolloClient<any>): Promise<boolean> {
     const oldRefreshToken = getRefreshToken();
     if (!oldRefreshToken) return false;
-    const { data } = await client
-        .mutate<{ refreshToken: { token: string; refreshToken: string; payload: any; refreshTokenExpiresIn: number; }; }>({
-            mutation: RefreshToken,
+    const { data } = await client.mutate({
+            mutation: RefreshTokenDocument,
             variables: {
                 refreshToken: getRefreshToken()
             }

@@ -7,12 +7,16 @@
     "dev": "rollup -c -w",
     "start": "sirv public --no-clear",
     "check": "svelte-check --tsconfig ./tsconfig.json",
-    "test": "rollup -c rollup.test.config.js && mocha --"
+    "test": "rollup -c rollup.test.config.js && mocha --",
+    "gengql": "graphql-codegen --config codegen.yml"
   },
   "devDependencies": {
     "@apollo/client": "^3.3.20",
+    "@graphql-codegen/cli": "1.21.8",
+    "@graphql-codegen/typed-document-node": "^1.18.10",
+    "@graphql-codegen/typescript": "^1.23.0",
+    "@graphql-codegen/typescript-operations": "^1.18.4",
     "@rollup/plugin-commonjs": "^17.0.0",
-    "@rollup/plugin-graphql": "^1.0.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-multi-entry": "^4.0.0",
     "@rollup/plugin-node-resolve": "^11.0.0",
