@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { getClient } from "svelte-apollo";
+    import { getClient } from "../services/client/context";
     import { ConnectionList } from "../helpers/ConnectionList";
     import { LoadMoreChildCommentsDocument } from '../requests';
     import CommentsLevel from "./CommentsLevel/CommentsLevel.svelte";

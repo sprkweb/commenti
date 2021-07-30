@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { getClient } from 'svelte-apollo';
+    import { getClient } from "../services/client/context";
     import { _ } from 'svelte-i18n';
 
     import { ConnectionList } from "../helpers/ConnectionList";

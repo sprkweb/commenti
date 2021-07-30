@@ -3,7 +3,7 @@
     import createClient from './services/client';
     import authState from './services/auth';
 
-    import { setClient } from "svelte-apollo";
+    import { setClient } from "./services/client/context";
     import { isLoading } from 'svelte-i18n'
 
     import UserAuthBlock from "./components/UserAuth/UserAuthBlock.svelte";
