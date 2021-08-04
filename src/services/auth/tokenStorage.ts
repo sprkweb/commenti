@@ -1,5 +1,5 @@
 import type { ApolloClient } from "@apollo/client";
-import { TokenAuthDocument, RefreshTokenDocument } from '../../requests';
+import { TokenAuthDocument, RefreshTokenDocument, RevokeTokenDocument } from '../../requests';
 
 const accessTokenKey = 'commentiAccessToken';
 const refreshTokenKey = 'commentiRefreshToken'
@@ -7,13 +7,13 @@ const refreshTokenKey = 'commentiRefreshToken'
 /**
  * This doesn't guarantee that tokens aren't expired
  */
-function tokenIsSet(): boolean {
+export function tokenIsSet(): boolean {
     return !!(
         localStorage.getItem(accessTokenKey) &&
         localStorage.getItem(refreshTokenKey));
 }
 
-function getToken(): string {
+export function getToken(): string {
     return localStorage.getItem(accessTokenKey);
 };
 
@@ -29,12 +29,12 @@ function setRefreshToken(token: string) {
     localStorage.setItem(refreshTokenKey, token);
 }
 
-function clearTokens() {
+export function clearTokens() {
     localStorage.removeItem(accessTokenKey);
     localStorage.removeItem(refreshTokenKey);
 }
 
-async function tokenAuth(client: ApolloClient<any>, username: string, password: string): Promise<UserInfo> {
+export async function tokenAuth(client: ApolloClient<any>, username: string, password: string): Promise<UserInfo> {
     const { data } = await client.mutate({
             mutation: TokenAuthDocument,
             variables: {
@@ -46,13 +46,13 @@ async function tokenAuth(client: ApolloClient<any>, username: string, password: 
     return data.tokenAuth.user;
 };
 
-async function refreshToken(client: ApolloClient<any>): Promise<boolean> {
+export async function refreshToken(client: ApolloClient<any>): Promise<boolean> {
     const oldRefreshToken = getRefreshToken();
     if (!oldRefreshToken) return false;
     const { data } = await client.mutate({
             mutation: RefreshTokenDocument,
             variables: {
-                refreshToken: getRefreshToken()
+                refreshToken: oldRefreshToken
             }
         });
     if (!data.refreshToken) return false;
@@ -61,4 +61,18 @@ async function refreshToken(client: ApolloClient<any>): Promise<boolean> {
     return true;
 };
 
-export { getToken, refreshToken, tokenAuth, tokenIsSet, clearTokens };
+async function revokeToken(client: ApolloClient<any>): Promise<boolean> {
+    const oldRefreshToken = getRefreshToken();
+    await client.mutate({
+            mutation: RevokeTokenDocument,
+            variables: {
+                refreshToken: oldRefreshToken
+            }
+        });
+    return true;
+};
+
+export async function tokenLogout(client: ApolloClient<any>) {
+    await revokeToken(client);
+    clearTokens();
+}

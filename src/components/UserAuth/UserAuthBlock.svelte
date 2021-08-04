@@ -14,7 +14,7 @@
     }
 
     function logout() {
-        // TODO
+        authState.logout(client);
     }
 </script>
 

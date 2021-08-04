@@ -10,11 +10,11 @@ mutation TokenAuth($username: String!, $password: String!) {
   }
 }
 
-# mutation RevokeToken($refreshToken: String!) {
-#   revokeToken(refreshToken: $refreshToken) {
-#     revoked
-#   }
-# }
+mutation RevokeToken($refreshToken: String!) {
+    revokeToken(refreshToken: $refreshToken) {
+        revoked
+    }
+}
 
 # mutation VerifyToken($token: String!) {
 #   verifyToken(token: $token) {

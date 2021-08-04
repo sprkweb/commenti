@@ -3,7 +3,7 @@ import type { ApolloClient } from "@apollo/client";
 
 import { CurrentUserDocument } from '../../requests';
 
-import { tokenAuth, tokenIsSet } from './tokenStorage';
+import { tokenAuth, tokenLogout, tokenIsSet } from './tokenStorage';
 
 export enum AuthStatus {
     None                = 0,
@@ -70,6 +70,10 @@ const authStore = {
                     status: AuthStatus.AuthError
                 })
             );
+    },
+    logout(client: ApolloClient<any>) {
+        tokenLogout(client)
+            .then(() => this.checkCurrentUser(client));
     }
 };
 
