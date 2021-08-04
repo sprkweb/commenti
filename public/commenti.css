@@ -16,13 +16,22 @@
 
 .commenti-comment-children {
     border-left: 3px solid lightgrey;
-    padding: 1rem 0 0 1rem;
+    padding: 0.5rem 0 0 1rem;
+    margin-top: 0.5rem;
 }
 
 .commenti-auth-block {
     margin-bottom: 1rem;
 }
 
+.commenti-reply-form {
+    margin-bottom: 1rem;
+}
+
+.commenti-reply-form-text {
+    width: 100%;
+    resize: vertical;
+}
 
 .commenti-form-fields-group {
     display: table;
@@ -42,4 +51,17 @@
 .commenti-form-fields-group .commenti-form-field span:last-child {
     display: table-cell;
     padding-right: 0;
+}
+
+.commenti-inline-button {
+    font-family: inherit;
+    font-weight: bold;
+    line-height: 2rem;
+    text-transform: uppercase;
+    padding: 0;
+    background: none;
+    border: 0 none;
+    color: rgb(115, 115, 115);
+    cursor: pointer;
+    border-radius: 3px;
 }

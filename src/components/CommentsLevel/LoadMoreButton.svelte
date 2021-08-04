@@ -25,7 +25,8 @@
     {#if status == 'loading'}
         {$_('loading')}
     {:else if status == 'press-me'}
-        <button on:click={forward}>
+        <button on:click={forward}
+            class="commenti-inline-button">
             {$_('load-more-replies')}
         </button>
     {:else}

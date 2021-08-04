@@ -41,6 +41,17 @@ mutation RefreshToken($refreshToken: String!) {
 #   }
 # }
 
+mutation WriteComment(
+  	$text: String!,
+  	$page_id: String!,
+	$parent: ID) {
+    writeComment(input: { text: $text, page: $page_id, parent: $parent }) {
+        comment {
+            ...commentFields
+        }
+    }
+}
+
 query CurrentUser {
   currentUser {
     username

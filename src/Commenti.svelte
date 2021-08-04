@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { setContext } from 'svelte';
+
     import './services/i18n';
     import createClient from './services/client';
     import authState from './services/auth';
@@ -15,6 +17,10 @@
     const client = createClient(server_uri)
     setClient(client);
 
+    setContext("commenti-params", {
+        page_id
+    });
+
     authState.checkCurrentUser(client);
 </script>
 
@@ -23,6 +29,6 @@
         Loading...
     {:else}
         <UserAuthBlock />
-        <TopLevelComments page_id={page_id} />
+        <TopLevelComments />
     {/if}
 </main>

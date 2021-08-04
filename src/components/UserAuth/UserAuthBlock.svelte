@@ -21,7 +21,8 @@
 <div class="commenti-auth-block">
     {#if stateMatch($authState.status, AuthStatus.LoggedIn) }
         {$_('userAuth.greetings', { values: { name: $authState.user.username } })}
-        <button on:click={logout}>
+        <button on:click={logout}
+            class="commenti-inline-button">
             {$_('userAuth.logout')}
         </button>
     {:else if stateMatch($authState.status, AuthStatus.LoadingUserInfo)}
@@ -29,7 +30,8 @@
     {:else}
         <button
             on:click={() => authState.setStatus(AuthStatus.LoggingIn)}
-            disabled={stateMatch($authState.status, AuthStatus.LoggingIn)}>
+            disabled={stateMatch($authState.status, AuthStatus.LoggingIn)}
+            class="commenti-inline-button">
             {$_('userAuth.login')}
         </button>
         {#if stateMatch($authState.status, AuthStatus.LoggingIn)}

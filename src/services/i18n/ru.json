@@ -10,5 +10,9 @@
     "formField": {
         "username": "Логин",
         "password": "Пароль"
-    }
+    },
+    "commentForm": {
+        "button": "Комментировать"
+    },
+    "reply": "Ответить"
 }

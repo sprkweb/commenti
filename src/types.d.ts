@@ -16,8 +16,10 @@ declare interface GQLConnection<NodeType> {
         endCursor?: string
         hasNextPage?: boolean
     },
-    edges?: Array<{
-        node?: NodeType
-        cursor?: string
-    }>
+    edges?: Array<GQLConnectionEdge>
+}
+
+declare interface GQLConnectionEdge<NodeType> {
+    node?: NodeType
+    cursor?: string
 }
