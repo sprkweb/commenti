@@ -59,7 +59,7 @@
     {/if}
 </div>
 
-{#if list.length > 0 || list.hasMore }
+{#if list.length > 0 || list.hasMore || replyFormShown }
     <div class="commenti-comment-children">
         {#if replyFormShown}
             <ReplyForm on:submit={writeComment} />
