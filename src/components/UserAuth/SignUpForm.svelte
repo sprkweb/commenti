@@ -6,26 +6,28 @@
     import { stateMatch } from '../../helpers/bitwiseEnum';
     import FormField from "../../partials/FormField.svelte";
 
+    let email: string;
     let username: string;
     let password: string;
 
 	const dispatch = createEventDispatcher();
     function handleSubmit(e) {
-        dispatch('submit', { username, password });
+        dispatch('submit', { username, email, password });
     }
 </script>
 
 <div class="commenti-form-fields-group">
+    <FormField fieldName="email" type="email" bind:value={email} required={true} />
     <FormField fieldName="username" bind:value={username} required={true} />
     <FormField fieldName="password" type="password" bind:value={password} required={true} />
 </div>
-{#if stateMatch($authState.status, AuthStatus.AuthError)}
+{#if stateMatch($authState.status, AuthStatus.RegistrationError)}
     <p class="commenti-error-message">
-        {$_('userAuth.error')}
+        {$_('userAuth.signupError')}
     </p>
 {/if}
 <button
     on:click={handleSubmit}
-    disabled={stateMatch($authState.status, AuthStatus.LoadingAuthResults)}>
-    {$_('userAuth.login')}
+    disabled={stateMatch($authState.status, AuthStatus.LoadingRegistrationResults)}>
+    {$_('userAuth.signup')}
 </button>

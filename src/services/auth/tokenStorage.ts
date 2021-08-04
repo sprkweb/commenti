@@ -1,5 +1,5 @@
 import type { ApolloClient } from "@apollo/client";
-import { TokenAuthDocument, RefreshTokenDocument, RevokeTokenDocument } from '../../requests';
+import { TokenAuthDocument, RefreshTokenDocument, RevokeTokenDocument, CreateUserDocument } from '../../requests';
 
 const accessTokenKey = 'commentiAccessToken';
 const refreshTokenKey = 'commentiRefreshToken'
@@ -75,4 +75,16 @@ async function revokeToken(client: ApolloClient<any>): Promise<boolean> {
 export async function tokenLogout(client: ApolloClient<any>) {
     await revokeToken(client);
     clearTokens();
+}
+
+export async function createUser(client: ApolloClient<any>, userDetails): Promise<UserInfo> {
+    const { data } = await client.mutate({
+            mutation: CreateUserDocument,
+            variables: {
+                ...userDetails
+            }
+        });
+    setToken(data.createUser.token);
+    setRefreshToken(data.createUser.refreshToken);
+    return data.createUser.user;
 }

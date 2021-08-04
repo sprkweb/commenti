@@ -4,11 +4,14 @@
     "userAuth": {
         "login": "Войти",
         "logout": "Выйти",
+        "signup": "Зарегистрироваться",
         "greetings": "Вы вошли как {name}.",
-        "error": "Что-то пошло не так"
+        "error": "Что-то пошло не так",
+        "signupError": "Что-то пошло не так"
     },
     "formField": {
         "username": "Логин",
+        "email": "Email",
         "password": "Пароль"
     },
     "commentForm": {

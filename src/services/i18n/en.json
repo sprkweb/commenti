@@ -4,11 +4,14 @@
     "userAuth": {
         "login": "Log in",
         "logout": "Log out",
+        "signup": "Sign up",
         "greetings": "You are logged in as {name}.",
-        "error": "Something went wrong"
+        "error": "Something went wrong",
+        "signupError": "Something went wrong"
     },
     "formField": {
         "username": "Login",
+        "email": "Email",
         "password": "Password"
     },
     "commentForm": {

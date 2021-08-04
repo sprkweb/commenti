@@ -3,17 +3,23 @@ import type { ApolloClient } from "@apollo/client";
 
 import { CurrentUserDocument } from '../../requests';
 
-import { tokenAuth, tokenLogout, tokenIsSet } from './tokenStorage';
+import { tokenAuth, tokenLogout, tokenIsSet, createUser } from './tokenStorage';
 
 export enum AuthStatus {
     None                = 0,
     LoggedIn            = 1,
-
     LoadingUserInfo     = 1 << 1,
-
     LoggingIn           = 1 << 2,
-    LoadingAuthResults  = LoggingIn | 1 << 3,
-    AuthError           = LoggingIn | 1 << 4
+    Registration        = 1 << 3,
+
+    LoadingResults      = 1 << 4,
+    RequestFailed       = 1 << 5,
+
+    LoadingAuthResults  = LoggingIn | LoadingResults,
+    AuthError           = LoggingIn | RequestFailed,
+
+    LoadingRegistrationResults  = Registration | LoadingResults,
+    RegistrationError           = Registration | RequestFailed
 }
 
 interface AuthStore {
@@ -74,6 +80,23 @@ const authStore = {
     logout(client: ApolloClient<any>) {
         tokenLogout(client)
             .then(() => this.checkCurrentUser(client));
+    },
+    signup(client: ApolloClient<any>, username: string, email: string, password: string) {
+        set({
+            status: AuthStatus.LoadingRegistrationResults
+        });
+        createUser(client, { username, email, password })
+            .then(user =>
+                set({
+                    status: AuthStatus.LoggedIn,
+                    user
+                })
+            )
+            .catch(err =>
+                set({
+                    status: AuthStatus.RegistrationError
+                })
+            );
     }
 };
 

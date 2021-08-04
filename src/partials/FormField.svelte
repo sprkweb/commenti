@@ -4,6 +4,7 @@
     export let fieldName: string;
     export let type: string = "text";
     export let value: string = "";
+    export let required: boolean = false;
 
     const name = `commenti_field_${fieldName}`;
 
@@ -14,5 +15,5 @@
 
 <div class="commenti-form-field">
     <label for={name}>{$_(`formField.${fieldName}`)}</label>
-    <span><input {type} {name} on:input={handleInput}></span>
+    <span><input {type} {required} {name} on:input={handleInput}></span>
 </div>
