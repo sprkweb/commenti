@@ -16,14 +16,22 @@
         }
     </style>
 
+    <!-- Here we load default styles for comments -->
 	<link rel='stylesheet' href='/commenti.css'>
+    <!-- If you want to customize styles, you can overwrite some of them here -->
+    <!-- or write completely new styles using default ones as a reference -->
+
     <script defer type="module">
         import Commenti from '/build/Commenti.js';
 
         new Commenti({
+            // Choose an empty container for comments here
             target: document.getElementById('comments'),
             props: {
+                // URI of your Commenti Server
                 server_uri: 'http://localhost:8012/graphql',
+                // Unique ID of the current page
+                // It can be any string, e.g. canonical URL
                 page_id: '123'
             }
         });
