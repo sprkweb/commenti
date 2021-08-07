@@ -5,7 +5,6 @@ import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import sveltePreprocess from 'svelte-preprocess';
 import typescript from '@rollup/plugin-typescript';
-import css from 'rollup-plugin-css-only';
 import json from '@rollup/plugin-json';
 import replace from '@rollup/plugin-replace';
 
@@ -37,8 +36,7 @@ export default {
 	output: {
 		sourcemap: true,
 		format: 'esm',
-		name: 'app',
-		dir: 'public/build'
+		name: 'app'
 	},
 	plugins: [
         // https://github.com/timhall/svelte-apollo/issues/8
@@ -53,9 +51,6 @@ export default {
 				dev: !production
 			}
 		}),
-		// we'll extract any component CSS out into
-		// a separate file - better for performance
-		css({ output: 'commenti.css' }),
 
         json({ compact: true }),
 

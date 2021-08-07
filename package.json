@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "rollup -c",
-    "dev": "rollup -c -w",
+    "build": "mkdir public/build/ && cp public/commenti.css public/build/ && rollup -c --dir public/build",
+    "dev": "rollup -c -w --dir public/build",
     "start": "sirv public --no-clear",
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "test": "rollup -c rollup.test.config.js && mocha --",
