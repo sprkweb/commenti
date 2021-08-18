@@ -17,5 +17,9 @@
     "commentForm": {
         "button": "Comment"
     },
-    "reply": "Reply"
+    "reply": "Reply",
+    "replacementForDeleted": {
+        "username": "Ghost",
+        "commentText": "This comment is deleted"
+    }
 }

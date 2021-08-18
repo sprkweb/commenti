@@ -7,7 +7,7 @@ declare interface CommentInfo {
     dateCreated: string
     dateEdited: string
     author?: UserInfo
-    text: string
+    text?: string
     children?: GQLConnection<CommentInfo>
 }
 

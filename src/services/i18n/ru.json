@@ -17,5 +17,9 @@
     "commentForm": {
         "button": "Комментировать"
     },
-    "reply": "Ответить"
+    "reply": "Ответить",
+    "replacementForDeleted": {
+        "username": "Призрак",
+        "commentText": "Комментарий удалён"
+    }
 }

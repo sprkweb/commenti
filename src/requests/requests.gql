@@ -52,6 +52,12 @@ mutation WriteComment(
     }
 }
 
+mutation DeleteComment($id: ID) {
+  deleteComment(input: { id: $id }) {
+    success
+  }
+}
+
 query CurrentUser {
   currentUser {
     username
@@ -115,6 +121,7 @@ fragment commentFields on CommentNode {
     id
     dateCreated
     dateEdited
+  	deleted
     author {
         username
     }

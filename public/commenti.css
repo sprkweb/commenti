@@ -14,6 +14,11 @@
     color: red;
 }
 
+.commenti-comment-content-deleted {
+    color: #777;
+    font-style: italic;
+}
+
 .commenti-comment-children {
     border-left: 3px solid lightgrey;
     padding: 0.5rem 0 0 1rem;
