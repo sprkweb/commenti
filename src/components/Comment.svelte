@@ -1,6 +1,9 @@
 <script lang="ts">
     import { _ } from 'svelte-i18n';
 
+    import authState, { AuthStatus } from '../services/auth';
+    import { stateMatch } from '../helpers/bitwiseEnum';
+
     import FormattedDate from "../partials/FormattedDate.svelte";
     import CommentChildren from "./CommentChildren.svelte";
 
@@ -8,6 +11,11 @@
 
     let date: Date;
     $: date = new Date(comment.dateCreated);
+
+    let replyFormShown = false;
+    function toggleReplyForm() {
+        replyFormShown = !replyFormShown;
+    }
 </script>
 
 <div class="commenti-comment">
@@ -25,7 +33,17 @@
         </div>
     </div>
 
+    <div class="commenti-comment-controls">
+        {#if stateMatch($authState.status, AuthStatus.LoggedIn) }
+            <button
+                on:click={toggleReplyForm}
+                class="commenti-inline-button">
+                {$_("reply")}
+            </button>
+        {/if}
+    </div>
+
     {#if comment.children}
-        <CommentChildren comment={comment} />
+        <CommentChildren comment={comment} {replyFormShown} />
     {/if}
 </div>
