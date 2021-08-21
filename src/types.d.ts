@@ -9,6 +9,7 @@ declare interface CommentInfo {
     author?: UserInfo
     text?: string
     children?: GQLConnection<CommentInfo>
+    deleted: boolean
 }
 
 declare interface GQLConnection<NodeType> {
