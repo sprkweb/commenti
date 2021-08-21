@@ -7,7 +7,7 @@
     import { ConnectionList } from "../helpers/ConnectionList";
     import { stateMatch } from '../helpers/bitwiseEnum';
     import CommentsLevel from './CommentsLevel/CommentsLevel.svelte';
-    import ReplyForm from "../partials/ReplyForm.svelte";
+    import ReplyForm from "./ReplyForm.svelte";
     import Comment from './Comment.svelte';
     import { GetCommentsDocument, WriteCommentDocument } from '../requests';
 
