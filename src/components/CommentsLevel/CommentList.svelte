@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Comment from '../Comment.svelte';
+    import Comment from '../Comment/Comment.svelte';
 
     export let list: ArrayLike<CommentInfo>;
 </script>

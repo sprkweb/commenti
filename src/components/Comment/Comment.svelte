@@ -1,14 +1,14 @@
 <script lang="ts">
     import { _ } from 'svelte-i18n';
 
-    import { getClient } from "../services/client/context";
-    import authState, { AuthStatus } from '../services/auth';
-    import { stateMatch } from '../helpers/bitwiseEnum';
+    import { getClient } from "../../services/client/context";
+    import authState, { AuthStatus } from '../../services/auth';
+    import { stateMatch } from '../../helpers/bitwiseEnum';
 
-    import FormattedDate from "../partials/FormattedDate.svelte";
-    import EditForm from './Comment/EditForm.svelte';
-    import CommentChildren from "./CommentChildren.svelte";
-    import { DeleteCommentDocument } from '../requests';
+    import FormattedDate from "../../partials/FormattedDate.svelte";
+    import EditForm from './EditForm.svelte';
+    import CommentChildren from "../CommentChildren.svelte";
+    import { DeleteCommentDocument } from '../../requests';
 
     export let comment: CommentInfo;
 

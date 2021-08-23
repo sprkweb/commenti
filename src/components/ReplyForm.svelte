@@ -5,7 +5,7 @@
     import { stateMatch } from '../helpers/bitwiseEnum';
     import authState, { AuthStatus } from '../services/auth';
     import { getClient } from "../services/client/context";
-    import Comment from './Comment.svelte';
+    import Comment from './Comment/Comment.svelte';
     import CommentTextField from '../partials/CommentTextField.svelte';
     import { WriteCommentDocument } from '../requests';
 
