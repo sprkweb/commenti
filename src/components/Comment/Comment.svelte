@@ -2,9 +2,10 @@
     import { _ } from 'svelte-i18n';
 
     import { getClient } from "../../services/client/context";
-    import { valueIfExists, CommentStatus } from './status';
+    import { CommentStatus } from './status';
 
     import CommentHeader from './CommentHeader.svelte';
+    import CommentContent from './CommentContent.svelte';
     import CommentControls from './CommentControls.svelte';
     import EditForm from './EditForm.svelte';
     import CommentChildren from "../CommentChildren.svelte";
@@ -52,9 +53,7 @@
         <CommentHeader {comment} {status} />
 
         {#if status != CommentStatus.EditMode}
-            <div class="commenti-comment-content { valueIfExists(status, comment.text) ? '' : 'commenti-comment-content-deleted'}">
-                { valueIfExists(status, comment.text) || $_('replacementForDeleted.commentText') }
-            </div>
+            <CommentContent {comment} {status} />
         {:else}
             <EditForm
                 initialText={comment.text}
