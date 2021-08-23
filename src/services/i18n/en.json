@@ -17,9 +17,14 @@
     "commentForm": {
         "button": "Comment"
     },
+    "commentEditForm": {
+        "submit": "Save",
+        "cancel": "Cancel"
+    },
     "commentControls": {
         "reply": "Reply",
-        "delete": "Delete"
+        "delete": "Delete",
+        "edit": "Edit"
     },
     "replacementForDeleted": {
         "username": "Ghost",

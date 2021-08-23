@@ -6,6 +6,7 @@
     import authState, { AuthStatus } from '../services/auth';
     import { getClient } from "../services/client/context";
     import Comment from './Comment.svelte';
+    import CommentTextField from '../partials/CommentTextField.svelte';
     import { WriteCommentDocument } from '../requests';
 
     export let parent_id: string = undefined;
@@ -42,11 +43,7 @@
 
 {#if stateMatch($authState.status, AuthStatus.LoggedIn) }
     <form class="commenti-reply-form">
-        <textarea
-            bind:value={text}
-            rows="5"
-            class="commenti-reply-form-text"
-            ></textarea>
+        <CommentTextField bind:value={text} />
 
         <button
             type="button"

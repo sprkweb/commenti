@@ -33,8 +33,9 @@
     margin-bottom: 1rem;
 }
 
-.commenti-reply-form-text {
+.commenti-comment-text-field {
     width: 100%;
+    font: inherit;
     resize: vertical;
 }
 

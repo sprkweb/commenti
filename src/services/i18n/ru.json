@@ -17,9 +17,14 @@
     "commentForm": {
         "button": "Комментировать"
     },
+    "commentEditForm": {
+        "submit": "Сохранить",
+        "cancel": "Отменить"
+    },
     "commentControls": {
         "reply": "Ответить",
-        "delete": "Удалить"
+        "delete": "Удалить",
+        "edit": "Изменить"
     },
     "replacementForDeleted": {
         "username": "Призрак",

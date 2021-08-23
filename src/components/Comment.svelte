@@ -6,6 +6,7 @@
     import { stateMatch } from '../helpers/bitwiseEnum';
 
     import FormattedDate from "../partials/FormattedDate.svelte";
+    import EditForm from './Comment/EditForm.svelte';
     import CommentChildren from "./CommentChildren.svelte";
     import { DeleteCommentDocument } from '../requests';
 
@@ -16,13 +17,20 @@
     let date: Date;
     $: date = new Date(comment.dateCreated);
 
-    let replyFormShown = false;
-    function toggleReplyForm() {
-        replyFormShown = !replyFormShown;
+    enum CommentStatus {
+        Normal,
+        Deleted,
+        EditMode
+    }
+    let status: CommentStatus;
+    $: status = comment.deleted
+        ? CommentStatus.Deleted
+        : CommentStatus.Normal;
+
+    function valueIfExists<T>(status: CommentStatus, value: T): T | false {
+        return (status != CommentStatus.Deleted) && value;
     }
 
-    let isDeleted: boolean;
-    $: isDeleted = comment.deleted;
     function deleteComment() {
         client
             .mutate({
@@ -32,8 +40,22 @@
                 }
             })
             .then(({ data }) => {
-                isDeleted = data.deleteComment.success;
+                if (data.deleteComment.success)
+                    status = CommentStatus.Deleted;
             });
+    }
+
+    function enableEditMode() {
+        if (status != CommentStatus.Normal) return;
+        status = CommentStatus.EditMode;
+    }
+    function disableEditMode() {
+        status = CommentStatus.Normal;
+    }
+
+    let replyFormShown = false;
+    function toggleReplyForm() {
+        replyFormShown = !replyFormShown;
     }
 </script>
 
@@ -41,34 +63,49 @@
     <div class="commenti-comment-main">
         <div class="commenti-comment-header">
             <span class="commenti-author">
-                { !isDeleted && comment.author?.username || $_('replacementForDeleted.username') }
+                { valueIfExists(status, comment.author?.username) || $_('replacementForDeleted.username') }
             </span>
             <span class="commenti-date">
                 <FormattedDate date={date} />
             </span>
         </div>
-        <div class="commenti-comment-content { !isDeleted && comment.text ? '' : 'commenti-comment-content-deleted'}">
-            { !isDeleted && comment.text || $_('replacementForDeleted.commentText') }
-        </div>
-    </div>
 
-    <div class="commenti-comment-controls">
-        {#if stateMatch($authState.status, AuthStatus.LoggedIn) }
-            <button
-                on:click={toggleReplyForm}
-                class="commenti-inline-button">
-                {$_("commentControls.reply")}
-            </button>
-
-            {#if $authState.user.username == comment.author?.username}
-                <button
-                    on:click={deleteComment}
-                    class="commenti-inline-button">
-                    {$_("commentControls.delete")}
-                </button>
-            {/if}
+        {#if status != CommentStatus.EditMode}
+            <div class="commenti-comment-content { valueIfExists(status, comment.text) ? '' : 'commenti-comment-content-deleted'}">
+                { valueIfExists(status, comment.text) || $_('replacementForDeleted.commentText') }
+            </div>
+        {:else}
+            <EditForm
+                initialText={comment.text}
+                on:disableEditMode={disableEditMode} />
         {/if}
     </div>
+
+    {#if status == CommentStatus.Normal}
+        <div class="commenti-comment-controls">
+            {#if stateMatch($authState.status, AuthStatus.LoggedIn) }
+                <button
+                    on:click={toggleReplyForm}
+                    class="commenti-inline-button">
+                    {$_("commentControls.reply")}
+                </button>
+
+                {#if $authState.user.username == valueIfExists(status, comment.author?.username)}
+                    <button
+                        on:click={deleteComment}
+                        class="commenti-inline-button">
+                        {$_("commentControls.delete")}
+                    </button>
+
+                    <button
+                        on:click={enableEditMode}
+                        class="commenti-inline-button">
+                        {$_("commentControls.edit")}
+                    </button>
+                {/if}
+            {/if}
+        </div>
+    {/if}
 
     {#if comment.children}
         <CommentChildren comment={comment} {replyFormShown} />
