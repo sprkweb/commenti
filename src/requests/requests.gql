@@ -58,6 +58,12 @@ mutation DeleteComment($id: ID) {
   }
 }
 
+mutation EditComment($id: ID!, $text: String!) {
+  editComment(input: { id: $id, text: $text }) {
+    success
+  }
+}
+
 query CurrentUser {
   currentUser {
     username

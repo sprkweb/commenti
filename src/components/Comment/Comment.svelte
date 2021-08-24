@@ -56,6 +56,7 @@
             <CommentContent {comment} {status} />
         {:else}
             <EditForm
+                {comment}
                 initialText={comment.text}
                 on:disableEditMode={disableEditMode} />
         {/if}

@@ -2,17 +2,41 @@
     import { _ } from 'svelte-i18n';
 	import { createEventDispatcher } from 'svelte';
 
-    import CommentTextField from '../../partials/CommentTextField.svelte';
+    import { getClient } from "../../services/client/context";
 
+    import CommentTextField from '../../partials/CommentTextField.svelte';
+    import FormattedError from '../../partials/FormattedError.svelte';
+    import { EditCommentDocument } from '../../requests';
+
+    const client = getClient();
 	const dispatch = createEventDispatcher();
 
     export let initialText: string;
+    export let comment: CommentInfo;
 
     let text: string = initialText;
+    let error;
 
     function editComment() {
-        // TODO
-        dispatch('disableEditMode');
+        const editedText = text;
+        client
+            .mutate({
+                mutation: EditCommentDocument,
+                variables: {
+                    id: comment.id,
+                    text: editedText
+                }
+            })
+            .then(({ data }) => {
+                if (data.editComment.success) {
+                    comment.text = editedText;
+                    dispatch('disableEditMode');
+                }
+                else {
+                    error = 'Error';
+                }
+            })
+            .catch((e) => error = e);
     }
 
     function cancelEditComment() {
@@ -34,4 +58,6 @@
         on:click={cancelEditComment}>
         {$_("commentEditForm.cancel")}
     </button>
+
+    <FormattedError {error} />
 </form>
