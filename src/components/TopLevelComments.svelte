@@ -4,6 +4,7 @@
     import { _ } from 'svelte-i18n';
 
     import { ConnectionList } from "../helpers/ConnectionList";
+    import FormattedError from '../partials/FormattedError.svelte';
     import CommentsLevel from './CommentsLevel/CommentsLevel.svelte';
     import ReplyForm from "./ReplyForm.svelte";
     import { GetCommentsDocument } from '../requests';
@@ -41,7 +42,7 @@
 {#if loading}
     {$_('loading')}
 {:else if error}
-    {error.toString()}
+    <FormattedError {error} />
 {:else}
     <ReplyForm />
     <CommentsLevel

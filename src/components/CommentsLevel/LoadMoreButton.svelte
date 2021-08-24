@@ -2,6 +2,8 @@
     import { _ } from 'svelte-i18n';
 	import { createEventDispatcher } from 'svelte';
 
+    import FormattedError from '../../partials/FormattedError.svelte';
+
     export let list: { hasMore: boolean };
 
     let status: string = 'press-me';
@@ -30,6 +32,6 @@
             {$_('load-more-replies')}
         </button>
     {:else}
-        {error.toString()}
+        <FormattedError {error} />
     {/if}
 {/if}

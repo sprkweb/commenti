@@ -5,6 +5,7 @@
     import authState, { AuthStatus } from '../../services/auth';
     import { stateMatch } from '../../helpers/bitwiseEnum';
     import FormField from "../../partials/FormField.svelte";
+    import FormattedError from '../../partials/FormattedError.svelte';
 
     let email: string;
     let username: string;
@@ -22,9 +23,7 @@
     <FormField fieldName="password" type="password" bind:value={password} required={true} />
 </div>
 {#if stateMatch($authState.status, AuthStatus.RegistrationError)}
-    <p class="commenti-error-message">
-        {$_('userAuth.signupError')}
-    </p>
+    <FormattedError error={true} message={$_('userAuth.signupError')} />
 {/if}
 <button
     on:click={handleSubmit}

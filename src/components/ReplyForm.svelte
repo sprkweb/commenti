@@ -6,6 +6,8 @@
     import authState, { AuthStatus } from '../services/auth';
     import { getClient } from "../services/client/context";
     import Comment from './Comment/Comment.svelte';
+
+    import FormattedError from '../partials/FormattedError.svelte';
     import CommentTextField from '../partials/CommentTextField.svelte';
     import { WriteCommentDocument } from '../requests';
 
@@ -51,9 +53,7 @@
             {$_("commentForm.button")}
         </button>
 
-        {#if error}
-            {error.toString()}
-        {/if}
+        <FormattedError {error} />
     </form>
 
     {#if newComment}
