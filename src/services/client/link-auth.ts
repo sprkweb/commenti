@@ -15,6 +15,13 @@ function setTokenHeader(operation: Operation): void {
 		}));
 }
 
+function removeTokenHeader(operation: Operation): void {
+    operation.setContext(({ headers }) => {
+        delete headers['Authorization'];
+        return headers;
+    });
+}
+
 export function createAuthLink() {
     let client: ApolloClient<any>;
     function injectClient(newClient: ApolloClient<any>) {
@@ -46,8 +53,9 @@ export function createAuthLink() {
 					return fromPromise(
 							refreshToken().catch(() => {
 								// Refresh failed
-								finishRefresh();
                                 authService.clearTokens();
+                                removeTokenHeader(operation);
+								finishRefresh();
 								return forward(operation);
 							}),
 						).flatMap(() => {
