@@ -8,8 +8,14 @@
     export let comment: CommentInfo;
     export let status: CommentStatus;
 
-    let date: Date;
-    $: date = new Date(comment.dateCreated);
+    let dateCreated: Date;
+    $: dateCreated = new Date(comment.dateCreated);
+
+    let dateEdited: Date;
+    $: dateEdited = new Date(comment.dateEdited);
+
+    let dateDiff;
+    $: dateDiff = dateEdited.valueOf() - dateCreated.valueOf(); // milliseconds
 </script>
 
 <div class="commenti-comment-header">
@@ -17,6 +23,10 @@
         { valueIfExists(status, comment.author?.username) || $_('replacementForDeleted.username') }
     </span>
     <span class="commenti-date">
-        <FormattedDate date={date} />
+        <FormattedDate date={dateCreated} /><!--
+    -->{#if dateDiff > 1000}
+            {$_('commentWasEdited')}
+            <FormattedDate date={dateEdited} />
+        {/if}
     </span>
 </div>

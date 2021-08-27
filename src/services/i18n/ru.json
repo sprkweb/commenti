@@ -29,5 +29,6 @@
     "replacementForDeleted": {
         "username": "Призрак",
         "commentText": "Комментарий удалён"
-    }
+    },
+    "commentWasEdited": ", изменён "
 }

@@ -29,5 +29,6 @@
     "replacementForDeleted": {
         "username": "Ghost",
         "commentText": "This comment is deleted"
-    }
+    },
+    "commentWasEdited": ", edited "
 }
