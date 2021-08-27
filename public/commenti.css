@@ -14,6 +14,14 @@
     color: red;
 }
 
+.commenti-comment-content p {
+    margin: 0;
+}
+
+.commenti-comment-content p+p {
+    margin-top: 1em;
+}
+
 .commenti-comment-content-deleted {
     color: #777;
     font-style: italic;

@@ -5,6 +5,7 @@ Embedded comments
 Features:
 
 - Reddit-style "infinitely nested" comment trees
+- Optional Markdown support
 - Internationalization support
 - Free, open-source & self-hosted, which means it is fully customizable
 
@@ -16,7 +17,7 @@ First, it is important to clarify that this project is in development and is not
 
 1. Install [Commenti Server](https://github.com/sprkweb/commenti_server)
 2. Download a corresponding release of the UI script from [here](https://github.com/sprkweb/commenti/releases)
-3. Add the comments to your page (see [demo.html](https://github.com/sprkweb/commenti/blob/master/public/demo.html) for example):
+3. Add the comments to your page (see [demo.html](https://github.com/sprkweb/commenti/blob/master/public/demo.html) for a full example):
 
     ```html
     <!-- Here we load default styles for comments -->

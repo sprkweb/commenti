@@ -16,10 +16,19 @@
         }
     </style>
 
+
     <!-- Here we load default styles for comments -->
 	<link rel='stylesheet' href='/commenti.css'>
     <!-- If you want to customize styles, you can overwrite some of them here -->
     <!-- or write completely new styles using default ones as a reference -->
+
+
+    <!-- Optional Markdown library https://github.com/markdown-it/markdown-it -->
+    <!-- You can use either CDN or NPM -->
+    <script src="https://cdn.jsdelivr.net/npm/markdown-it@12.2.0/dist/markdown-it.min.js"
+        integrity="sha256-DeiqnTRRpbSmNqxvO6ZtaADe75E0RgZQ25zBy3MePEY="
+        crossorigin="anonymous"></script>
+
 
     <script defer type="module">
         import Commenti from '/build/Commenti.js';
@@ -32,7 +41,11 @@
                 server_uri: 'http://localhost:8012/graphql',
                 // Unique ID of the current page
                 // It can be any string, e.g. canonical URL
-                page_id: '123'
+                page_id: '123',
+                // Omit this if you do not want Markdown support.
+                // Otherwise, you can customize settings or use plugins,
+                // see the README of the Markdown library above
+                markdown_renderer: window.markdownit()
             }
         });
     </script>

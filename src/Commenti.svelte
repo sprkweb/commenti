@@ -13,12 +13,14 @@
 
     export let server_uri: string;
     export let page_id: string;
+    export let markdown_renderer: { render: (md: string) => string } = null;
 
-    const client = createClient(server_uri)
+    const client = createClient(server_uri);
     setClient(client);
 
     setContext("commenti-params", {
-        page_id
+        page_id,
+        markdown_renderer
     });
 
     authState.checkCurrentUser(client);
