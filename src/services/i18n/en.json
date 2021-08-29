@@ -27,7 +27,7 @@
         "edit": "Edit"
     },
     "replacementForDeleted": {
-        "username": "Ghost",
+        "username": "Anonymous",
         "commentText": "This comment is deleted"
     },
     "commentWasEdited": ", edited "

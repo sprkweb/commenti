@@ -27,7 +27,7 @@
         "edit": "Изменить"
     },
     "replacementForDeleted": {
-        "username": "Призрак",
+        "username": "Аноним",
         "commentText": "Комментарий удалён"
     },
     "commentWasEdited": ", изменён "
