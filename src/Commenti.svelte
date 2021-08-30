@@ -4,6 +4,7 @@
     import './services/i18n';
     import createClient from './services/client';
     import authState from './services/auth';
+    import getSettings from './services/settings';
 
     import { setClient } from "./services/client/context";
     import { isLoading } from 'svelte-i18n'
@@ -22,6 +23,7 @@
         page_id,
         markdown_renderer
     });
+    setContext("commenti-settings", getSettings(client));
 
     authState.checkCurrentUser(client);
 </script>
