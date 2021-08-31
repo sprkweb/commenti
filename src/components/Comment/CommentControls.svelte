@@ -17,7 +17,8 @@
 
 
 <div class="commenti-comment-controls">
-    {#if stateMatch($authState.status, AuthStatus.LoggedIn) || $allowAnonymous }
+    <!-- If comment.children exists (even if it has no children), it means the comment is a part of a tree, not a standalone one -->
+    {#if comment.children && (stateMatch($authState.status, AuthStatus.LoggedIn) || $allowAnonymous) }
         <button
             on:click={() => dispatch('reply')}
             class="commenti-inline-button">
