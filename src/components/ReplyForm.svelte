@@ -15,6 +15,7 @@
 
     const client = getClient();
     const { page_id } = getContext("commenti-params");
+    const { allowAnonymous } = getContext("commenti-settings");
 
     let text: string;
     let error;
@@ -43,7 +44,7 @@
     }
 </script>
 
-{#if stateMatch($authState.status, AuthStatus.LoggedIn) }
+{#if stateMatch($authState.status, AuthStatus.LoggedIn) || $allowAnonymous }
     <form class="commenti-reply-form">
         <CommentTextField bind:value={text} />
 

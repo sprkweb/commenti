@@ -12,18 +12,19 @@
 
 	const dispatch = createEventDispatcher();
 
-    const { allowEdit, allowDelete } = getContext("commenti-settings");
+    const { allowEdit, allowDelete, allowAnonymous } = getContext("commenti-settings");
 </script>
 
 
 <div class="commenti-comment-controls">
-    {#if stateMatch($authState.status, AuthStatus.LoggedIn) }
+    {#if stateMatch($authState.status, AuthStatus.LoggedIn) || $allowAnonymous }
         <button
             on:click={() => dispatch('reply')}
             class="commenti-inline-button">
             {$_("commentControls.reply")}
         </button>
-
+    {/if}
+    {#if stateMatch($authState.status, AuthStatus.LoggedIn) }
         {#if $authState.user.username == valueIfExists(status, comment.author?.username)}
             {#if $allowDelete}
                 <button
