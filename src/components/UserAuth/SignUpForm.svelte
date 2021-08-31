@@ -26,6 +26,7 @@
     <FormattedError error={true} message={$_('userAuth.signupError')} />
 {/if}
 <button
+    class="commenti-button"
     on:click={handleSubmit}
     disabled={stateMatch($authState.status, AuthStatus.LoadingRegistrationResults)}>
     {$_('userAuth.signup')}

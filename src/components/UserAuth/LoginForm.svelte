@@ -24,6 +24,7 @@
     <FormattedError error={true} message={$_('userAuth.error')} />
 {/if}
 <button
+    class="commenti-button"
     on:click={handleSubmit}
     disabled={stateMatch($authState.status, AuthStatus.LoadingAuthResults)}>
     {$_('userAuth.login')}

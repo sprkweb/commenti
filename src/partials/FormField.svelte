@@ -15,5 +15,10 @@
 
 <div class="commenti-form-field">
     <label for={name}>{$_(`formField.${fieldName}`)}</label>
-    <span><input {type} {required} {name} on:input={handleInput}></span>
+    <span>
+        <input
+            {type} {required} {name}
+            class="commenti-text-field"
+            on:input={handleInput}>
+    </span>
 </div>

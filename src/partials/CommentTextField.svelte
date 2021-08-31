@@ -5,5 +5,5 @@
 <textarea
     bind:value
     rows="5"
-    class="commenti-comment-text-field"
+    class="commenti-text-field commenti-comment-text-field"
     ></textarea>

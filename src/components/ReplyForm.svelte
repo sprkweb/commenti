@@ -50,6 +50,7 @@
 
         <button
             type="button"
+            class="commenti-button"
             on:click={handleSubmit}>
             {$_("commentForm.button")}
         </button>

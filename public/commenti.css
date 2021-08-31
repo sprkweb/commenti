@@ -37,13 +37,16 @@
     margin-bottom: 1rem;
 }
 
+.commenti-auth-block .commenti-form-fields-group {
+    margin-top: 1rem;
+}
+
 .commenti-reply-form {
     margin-bottom: 1rem;
 }
 
 .commenti-comment-text-field {
     width: 100%;
-    font: inherit;
     resize: vertical;
 }
 
@@ -59,6 +62,7 @@
 .commenti-form-fields-group .commenti-form-field span {
     display: table-cell;
     padding-right: 1rem;
+    padding-bottom: 0.5rem;
 }
 
 .commenti-form-fields-group .commenti-form-field label:last-child,
@@ -83,4 +87,24 @@
 .commenti-inline-button +
 .commenti-inline-button {
     margin-left: 1rem;
+}
+
+.commenti-button {
+    font-family: inherit;
+    font-size: 1rem;
+    line-height: 2rem;
+    padding: 0 1em;
+    background: #6d6d6d;
+    border: 0 none;
+    color: white;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.commenti-text-field {
+    background: white;
+    color: black;
+    font: inherit;
+    border-radius: 3px;
+    border: 2px solid #6d6d6d;
 }
